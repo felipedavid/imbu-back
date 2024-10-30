@@ -1,0 +1,11 @@
+
+services:
+  postgres:
+    image: postgres:17.0
+    restart: always
+    environment:
+      POSTGRES_USER: imbu
+      POSTGRES_PASSWORD: imbu
+      POSTGRES_DB: imbu
+    ports:
+      - 5432:5432

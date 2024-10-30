@@ -7,14 +7,14 @@ import { AuthGuard } from './auth.guard';
 export class AuthService {
     constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
-    async signIn(username: string, pass: string): Promise<any> {
+    async signIn(email: string, pass: string): Promise<any> {
         // TODO: Store the password using bcrypt
-        const user = await this.usersService.findOne(username);
+        const user = await this.usersService.findOne(email);
         if (user?.password !== pass) {
             throw new UnauthorizedException();
         }
 
-        const payload = {sub: user.userId, username: user.username}
+        const payload = {sub: user.userId, username: user.email}
 
         return {
             access_token: await this.jwtService.signAsync(payload)
