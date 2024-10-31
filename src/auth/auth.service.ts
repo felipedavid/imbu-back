@@ -9,7 +9,7 @@ export class AuthService {
 
     async signIn(email: string, pass: string): Promise<any> {
         // TODO: Store the password using bcrypt
-        const user = await this.usersService.findOne(email);
+        const user = await this.usersService.findOneByEmail(email);
         if (user?.password !== pass) {
             throw new UnauthorizedException();
         }
