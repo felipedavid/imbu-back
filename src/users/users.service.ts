@@ -12,9 +12,16 @@ export class UsersService {
     ) {}
 
     create(createUserDto: CreateUserDto) {
-        return this.userRepository.create({
+        const user = this.userRepository.create({
             ...createUserDto,
         })
+
+        const result = this.userRepository.save(user);
+        if (!result) {
+            throw new Error('Failed to create user');
+        }
+
+        return user;
     }
 
     findAll(): Promise<User[]> {
